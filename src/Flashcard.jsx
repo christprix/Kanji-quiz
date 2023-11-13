@@ -21,7 +21,7 @@ export default function Flashcard({ kanji }) {
           {kanji.character}
         </div>
       </div>
-      <div >{kanji.options.sort(() => Math.random() - 0.5).map(option => {
+      <div className='options' >{kanji.options.sort(() => Math.random() - 0.5).map(option => {
         return <div className='card'
           onClick={() => handleClick(option)} key={option}>
           {option}
