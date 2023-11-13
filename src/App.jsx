@@ -6,6 +6,11 @@ import axios from 'axios'
 function App() {
   const [kanji, setKanji] = useState([])
 
+  function decodeString(str) {
+    const textArea = document.createElement('textarea')
+    textArea.innerHTML = str
+    return textArea.value
+  }
   useEffect(() => {
     axios.get('https://kanjiapi.dev/v1/kanji/kyoiku')
       .then(res => {
@@ -19,7 +24,7 @@ function App() {
             setKanji([{
               id: kanji_data.unicode,
               character: kanji_data.kanji,
-              meaning: kanji_data.meanings['0'],
+              meaning: decodeString(kanji_data.meanings['0']),
               options: [res.data[getnum()], res.data[getnum()], res.data[getnum()], kanji_data.kanji]
             }
             ]);
