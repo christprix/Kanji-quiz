@@ -4,3 +4,50 @@
   align-items: center;
   flex-direction: column;
 }
+
+.card {
+  background-color: white;
+  border-radius: .25rem;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+  margin: rem;
+  height: 100px;
+  width: 200px;
+  color: black;
+  display: flex;
+  position: relative;
+  transform-style: preserve-3d;
+  align-items: center;
+  justify-content: center;
+  transition: 150ms;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+}
+
+.flip {
+  --rotate-y: 180deg;
+}
+
+.front {
+  position: absolute;
+  backface-visibility: hidden;
+  left: 0;
+  padding: 1rem;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+}
+
+.options {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.back {
+  position: absolute;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  padding: 1rem;
+}

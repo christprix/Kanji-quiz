@@ -1,15 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Flashcard({ kanji }) {
-  return (
-    <div className='card'>
-      <div className="front">
-        {kanji.character}
-      </div>
-      <div className="back">
-        {kanji.meaning}
-      </div>
+  const [flip, setFlip] = useState(false)
 
-    </div>
+  function handleClick(e) {
+    if (e === kanji.character) {
+      console.log("Right answer!");
+    }
+    else {
+      console.log('wrong answer!');
+    }
+  }
+  return (
+    <>
+      <div className={`card`}>
+        <div className="front">
+          <div>Which Kanji means "{kanji.meaning}"?</div>
+        </div>
+        <div className="back">
+          {kanji.character}
+        </div>
+      </div>
+      <div >{kanji.options.sort(() => Math.random() - 0.5).map(option => {
+        return <div className='card'
+          onClick={() => handleClick(option)} key={option}>
+          {option}
+        </div>
+      })}</div>
+    </>
+
   )
 }

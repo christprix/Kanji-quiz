@@ -1,9 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Flashcard from "./Flashcard";
+import axios from 'axios'
+
 function App() {
-  const [kanji, setKanji] = useState(KANJISAMPLE)
-  console.log(kanji);
+  const [kanji, setKanji] = useState([])
+
+  useEffect(() => {
+    axios.get('https://kanjiapi.dev/v1/kanji/kyoiku')
+      .then(res => {
+        let num = Math.floor(Math.random() * 80)
+        function getnum() {
+          return Math.floor(Math.random() * 80)
+        }
+        axios.get(`https://kanjiapi.dev/v1/kanji/${res.data[`${num}`]}`)
+          .then(response => {
+            let kanji_data = response.data
+            setKanji([{
+              id: kanji_data.unicode,
+              character: kanji_data.kanji,
+              meaning: kanji_data.meanings['0'],
+              options: [res.data[getnum()], res.data[getnum()], res.data[getnum()], kanji_data.kanji]
+            }
+            ]);
+          })
+      })
+  }, [])
+
   return (
     <>
       <div className='container'>
@@ -16,13 +39,5 @@ function App() {
   )
 
 }
-
-const KANJISAMPLE = [
-  {
-    id: 1,
-    character: "お前",
-    meaning: "Bitch"
-  }
-]
 
 export default App
