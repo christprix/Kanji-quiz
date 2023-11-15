@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import Flashcard from "./Flashcard";
 import Message from "./Message"
@@ -7,20 +7,22 @@ import giphy from 'giphy-api';
 
 function App() {
   const [kanji, setKanji] = useState([])
-  const [message, setMessage] = useState()
+  const [message, setMessage] = useState('')
   const gifs = []
+  const score = useRef(0)
 
+  function winMessage(params) {
+    setMessage('You won!')
+  }
   function decodeString(str) {
     const textArea = document.createElement('textarea')
     textArea.innerHTML = str
     return textArea.value
   }
-  // useEffect(() => {
-  //   giphy('fugAIDxnoRaThaxDlDdsa6MGcPzQkXXE').search("anime correct").then((res) => {
-  //     console.log(res.data);
-  //     gifs = res.data
-  //   })
-  // }, [])
+  function startOver(params) {
+    score.current = 0;
+    start();
+  }
 
   function start(e) {
     axios.get('https://kanjiapi.dev/v1/kanji/kyoiku')
@@ -48,9 +50,15 @@ function App() {
     <>
       <div className='container'>
         <h3>Are you smarter than a (Japanese) 5th grader?</h3>
-        <button className="btn" onClick={start}>Ready?</button>
+        {(() => {
+          if (score === 10) {
+            winMessage
+          }
+        })}
+        <div>{message}</div>
+        <button className="btn" onClick={startOver}>Start Game</button>
         {kanji.map(k => {
-          return <Flashcard kanji={k} key={k.id} start={start} />
+          return <Flashcard kanji={k} key={k.id} start={start} score={score} />
         })}
       </div>
     </>

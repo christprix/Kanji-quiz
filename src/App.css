@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
 }
 
 .card {
@@ -83,4 +84,19 @@
 
 .btn:hover {
   background-color: hsl(200, 100%, 40%);
+}
+
+.progress {
+  width: 500px;
+  height: 30px;
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.progress_fill {
+  width: 0%;
+  height: 100%;
+  background: #66aa33;
+  transition: all .5s;
 }
