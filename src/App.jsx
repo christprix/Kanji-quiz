@@ -15,12 +15,12 @@ function App() {
     textArea.innerHTML = str
     return textArea.value
   }
-  useEffect(() => {
-    giphy('fugAIDxnoRaThaxDlDdsa6MGcPzQkXXE').search("anime correct").then((res) => {
-      console.log(res.data);
-      gifs = res.data
-    })
-  }, [])
+  // useEffect(() => {
+  //   giphy('fugAIDxnoRaThaxDlDdsa6MGcPzQkXXE').search("anime correct").then((res) => {
+  //     console.log(res.data);
+  //     gifs = res.data
+  //   })
+  // }, [])
 
   function start(e) {
     axios.get('https://kanjiapi.dev/v1/kanji/kyoiku')
@@ -47,7 +47,7 @@ function App() {
   return (
     <>
       <div className='container'>
-        <h1>Are you smarter than a (Japanese) 5th grader?</h1>
+        <h3>Are you smarter than a (Japanese) 5th grader?</h3>
         <button className="btn" onClick={start}>Ready?</button>
         {kanji.map(k => {
           return <Flashcard kanji={k} key={k.id} start={start} />
