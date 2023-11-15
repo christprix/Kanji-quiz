@@ -73,6 +73,14 @@
   margin: .5rem;
 }
 
+.correct {
+  background-color: #66aa33;
+}
+
+.wrong {
+  background-color: #fd5564;
+}
+
 .btn:hover {
   background-color: hsl(200, 100%, 40%);
 }

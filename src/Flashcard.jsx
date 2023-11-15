@@ -1,22 +1,19 @@
 import React, { useState } from 'react'
 
-export default function Flashcard({ kanji, message, start }) {
-  const [flip, setFlip] = useState(false)
+export default function Flashcard({ kanji, start }) {
+  const [message, setMessage] = useState([])
 
   const handleClick = event => {
-    console.log(event.currentTarget.innerHTML);
-    console.log(kanji.character);
     if (event.currentTarget.innerHTML === kanji.character) {
-      console.log("Right answer!");
-      message("Right Answer")
-      start()
+      event.currentTarget.classList.add("correct")
     }
     else {
-      console.log('wrong answer!');
-      message("Wrong Answer")
       event.currentTarget.classList.add("wrong")
-      start()
     }
+  }
+
+  function NextQuestion() {
+    start()
   }
   return (
     <>
@@ -34,6 +31,8 @@ export default function Flashcard({ kanji, message, start }) {
           {option}
         </div>
       })}</div>
+      <div>{message}</div>
+      <button className="btn" onClick={NextQuestion}>Next</button>
     </>
 
   )

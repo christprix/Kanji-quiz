@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function Message({ message }) {
+export default function Message({ gif }) {
+  console.log(gif);
   return (
-    <div className='card'>
-      {message}
+    <div>
+      <img className="gif" ></img>
     </div>
   )
 }
