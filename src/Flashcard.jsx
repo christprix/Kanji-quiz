@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-export default function Flashcard({ kanji, start, score, chances, setChances, options }) {
+export default function Flashcard({ kanji, start, score, chances, setChances }) {
   useEffect(() => {
     document.querySelector(".progress_fill").style.width = `${score.current * 10}%`
   }, [])
