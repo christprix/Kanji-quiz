@@ -50,6 +50,7 @@
 .option {
   transition: 150ms;
   transform: translateY(var(--translate-y, 0));
+  font-size: large;
 }
 
 .option:hover {

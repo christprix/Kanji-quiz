@@ -9,7 +9,7 @@ function App() {
   const [message, setMessage] = useState('')
   const gifs = []
   const score = useRef(0)
-  const [points, setPoints] = useState(0)
+  const [chances, setChances] = useState(2)
 
   function winMessage(params) {
     setMessage('You won!')
@@ -39,7 +39,7 @@ function App() {
               id: kanji_data.unicode,
               character: kanji_data.kanji,
               meaning: decodeString(kanji_data.meanings['0']),
-              options: [res.data[getnum()], res.data[getnum()], res.data[getnum()], kanji_data.kanji]
+              options: [res.data[getnum()], res.data[getnum()], res.data[getnum()], kanji_data.kanji].sort(() => Math.random() - 0.5)
             }
             ]);
           })
@@ -53,7 +53,7 @@ function App() {
         <div>{message}</div>
         <button className="btn" onClick={startOver}>Start Game</button>
         {kanji.map(k => {
-          return <Flashcard kanji={k} key={k.id} start={start} score={score} setpoints={setPoints} />
+          return <Flashcard kanji={k} key={k.id} start={start} score={score} chances={chances} setChances={setChances} />
         })}
       </div>
     </>
