@@ -14,7 +14,6 @@ function App() {
   const score = useRef(0)
   const [chances, setChances] = useState(2)
   const [difficulty, setDifficult] = useState(null)
-  const [difficultyToggle, setDifficultToggle] = useState(false)
 
   function winMessage(params) {
     setMessage('You won!')
@@ -32,7 +31,9 @@ function App() {
   function handleClick(e) {
     e.preventDefault();
     setDifficult(e.currentTarget.value);
-    e.currentTarget.classList.add("level")
+    setMessage(e.currentTarget.id);
+    console.log(e.currentTarget.id);
+    console.log(message);
   }
 
   function start(e) {
@@ -63,11 +64,11 @@ function App() {
   return (
     <>
       <form className='header'>
-        <h3>Are you smarter than a?</h3>
+        <h3 className='title'>Are you smarter than a <div className='selection'>{message}</div> ?</h3>
         <div className="form-group">
           <div className='difficultSetting' name="" id="difficult">
             {difficult.map((level) => {
-              return <button onClick={handleClick} key={level.name} value={level.kanjiLevel}>{level.icon}</button>
+              return <button onClick={handleClick} key={level.name} id={level.name} value={level.kanjiLevel}>{level.icon}</button>
             })
             }
           </div>
@@ -85,7 +86,7 @@ function App() {
 }
 
 const difficult = [{ name: 'Japanese 5th Grader', icon: <FontAwesomeIcon icon={faChildren} size='xl' />, kanjiLevel: 'grade-2' },
-{ name: 'Japanese Adult', icon: <FontAwesomeIcon icon={faUserTie} size='xl' />, kanjiLevel: "kyoiku" },
+{ name: 'Japanese Salaryman', icon: <FontAwesomeIcon icon={faUserTie} size='xl' />, kanjiLevel: "kyoiku" },
 { name: 'Ninja', icon: <FontAwesomeIcon icon={faUserNinja} size='xl' />, kanjiLevel: 'joyo' },
 { name: 'Dragon', icon: <FontAwesomeIcon icon={faDragon} size='xl' />, kanjiLevel: 'grade-8' }]
 

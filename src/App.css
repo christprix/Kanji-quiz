@@ -6,6 +6,16 @@
   flex-direction: column;
 }
 
+.title {
+  transition: all 2s;
+  display: flex;
+  gap: .3rem;
+}
+
+.selection {
+  transform: translateY(180);
+}
+
 .difficultSetting {
   display: flex;
   gap: 3rem;
