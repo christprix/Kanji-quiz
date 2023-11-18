@@ -64,7 +64,7 @@ function App() {
   return (
     <>
       <form className='header'>
-        <h3 className='title'>Are you smarter than a <div className='selection'>{message}</div> ?</h3>
+        <h3 className='title'>Are you smarter than a {message}?</h3>
         <div className="form-group">
           <div className='difficultSetting' name="" id="difficult">
             {difficult.map((level) => {
