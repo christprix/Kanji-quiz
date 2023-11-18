@@ -9,7 +9,8 @@
 .title {
   transition: all 2s;
   display: flex;
-  gap: .3rem;
+  gap: .2rem;
+  flex-wrap: nowrap;
 }
 
 .selection {
@@ -35,6 +36,7 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
+  margin-top: 2rem;
 }
 
 .card {

@@ -75,10 +75,10 @@ function App() {
         </div>
       </form>
       <div className='container'>
-        <button className="btn start game" onClick={startOver}>Start Game</button>
         {kanji.map(k => {
           return <Flashcard kanji={k} key={k.id} start={start} score={score} chances={chances} setChances={setChances} />
         })}
+        <button className="btn start game" onClick={startOver}>New Game</button>
       </div>
     </>
   )
