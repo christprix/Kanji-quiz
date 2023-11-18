@@ -40,11 +40,11 @@
   gap: .5rem;
 }
 
-.options .card {
-  display: flex;
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin: .5rem;
   gap: .5rem;
-  flex-direction: column;
 }
 
 .option {
@@ -79,7 +79,7 @@
 }
 
 .wrong {
-  background-color: #fd5564;
+  background-color: red;
 }
 
 .btn:hover {

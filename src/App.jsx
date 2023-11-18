@@ -4,12 +4,12 @@ import Flashcard from "./Flashcard";
 import Message from "./Message"
 import axios from 'axios'
 import giphy from 'giphy-api';
-
 function App() {
   const [kanji, setKanji] = useState([])
   const [message, setMessage] = useState('')
   const gifs = []
   const score = useRef(0)
+  const [points, setPoints] = useState(0)
 
   function winMessage(params) {
     setMessage('You won!')
@@ -50,15 +50,10 @@ function App() {
     <>
       <div className='container'>
         <h3>Are you smarter than a (Japanese) 5th grader?</h3>
-        {(() => {
-          if (score === 10) {
-            winMessage
-          }
-        })}
         <div>{message}</div>
         <button className="btn" onClick={startOver}>Start Game</button>
         {kanji.map(k => {
-          return <Flashcard kanji={k} key={k.id} start={start} score={score} />
+          return <Flashcard kanji={k} key={k.id} start={start} score={score} setpoints={setPoints} />
         })}
       </div>
     </>
