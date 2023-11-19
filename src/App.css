@@ -30,6 +30,10 @@
   background-image: url();
 }
 
+.main-pic {
+  max-width: 235px;
+}
+
 .container {
   display: flex;
   justify-content: center;

@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import Flashcard from "./Flashcard";
+import Pic from "./Pic"
 import Message from "./Message"
 import axios from 'axios'
-import giphy from 'giphy-api';
+import ninja from './ninjabear.gif'
+import student from './student.gif'
+import salaryman from './salaryman.gif'
+import dragon from './dragon.gif'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie, faChildren, faDragon, faUserNinja } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,10 +18,9 @@ function App() {
   const score = useRef(0)
   const [chances, setChances] = useState(2)
   const [difficulty, setDifficult] = useState(null)
+  const [picture, setPicture] = useState(null)
 
-  function winMessage(params) {
-    setMessage('You won!')
-  }
+
   function decodeString(str) {
     const textArea = document.createElement('textarea')
     textArea.innerHTML = str
@@ -29,11 +32,22 @@ function App() {
   }
 
   function handleClick(e) {
+    const difficultSetting = e.currentTarget.id
     e.preventDefault();
     setDifficult(e.currentTarget.value);
     setMessage(e.currentTarget.id);
-    console.log(e.currentTarget.id);
-    console.log(message);
+    if (difficultSetting === 'Japanese 5th Grader') {
+      setPicture(student)
+    }
+    else if (difficultSetting === 'Japanese Salaryman') {
+      setPicture(salaryman)
+    }
+    else if (difficultSetting === 'Ninja') {
+      setPicture(ninja)
+    }
+    else if (difficultSetting === 'Dragon') {
+      setPicture(dragon)
+    }
   }
 
   function start(e) {
@@ -75,6 +89,7 @@ function App() {
         </div>
       </form>
       <div className='container'>
+        <Pic picture={picture} />
         {kanji.map(k => {
           return <Flashcard kanji={k} key={k.id} start={start} score={score} chances={chances} setChances={setChances} />
         })}
