@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import Flashcard from "./Flashcard";
 import Pic from "./Pic"
-import Message from "./Message"
 import axios from 'axios'
 import ninja from './ninjabear.gif'
 import student from './student.gif'
@@ -19,6 +18,7 @@ function App() {
   const [chances, setChances] = useState(2)
   const [difficulty, setDifficult] = useState(null)
   const [picture, setPicture] = useState(null)
+  const [warning, setWarning] = useState(null)
 
 
   function decodeString(str) {
@@ -34,6 +34,7 @@ function App() {
   function handleClick(e) {
     const difficultSetting = e.currentTarget.id
     e.preventDefault();
+    setWarning(null)
     setDifficult(e.currentTarget.value);
     setMessage(e.currentTarget.id);
     if (difficultSetting === 'Japanese 5th Grader') {
@@ -51,8 +52,7 @@ function App() {
   }
 
   function start(e) {
-    if (difficult !== null) {
-      console.log(difficult);
+    if (difficulty !== null) {
       axios.get(`https://kanjiapi.dev/v1/kanji/${difficulty}`)
         .then(res => {
           const multiplier = res.data.length
@@ -73,6 +73,9 @@ function App() {
             })
         })
     }
+    else if (difficulty === null) {
+      setWarning("Pick a difficulty dummy!")
+    }
   }
 
   return (
@@ -89,6 +92,7 @@ function App() {
         </div>
       </form>
       <div className='container'>
+        <div>{warning}</div>
         <Pic picture={picture} />
         {kanji.map(k => {
           return <Flashcard kanji={k} key={k.id} start={start} score={score} chances={chances} setChances={setChances} />
